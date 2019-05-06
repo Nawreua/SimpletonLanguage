@@ -1,0 +1,34 @@
+language := exps;
+
+exps := %empty
+     | 'import' id exps
+     | 'function' id 'takes' args 'computes' exp 'end' exps
+     | exp exps
+     ;
+
+exp := id
+    | int
+    | 'true'
+    | 'false'
+    | 'call' id 'with' params 'end'
+    | 'if' exp 'then' exp 'end'
+    | 'if' exp 'then' exp 'else' exp 'end'
+    ;
+
+args := 'nothing'
+     | arg
+     ;
+
+arg := id 'being' type-id
+    | id 'being' type-id 'and' arg
+    ;
+
+params := 'nothing'
+       | param
+       ;
+
+param := exp
+      | exp 'and' param
+      ;
+
+type-id := id; // basic types: int and bool

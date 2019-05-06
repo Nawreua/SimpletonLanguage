@@ -1,0 +1,11 @@
+AST/
+    Function (String, List<Arg>, Exp)
+    Exp/
+        Var (String)
+        IntExp (int)
+        BoolExp (boolean)
+        CallExp (String, List<Exp>)
+        IfExp (Exp, Exp, Opt<Exp>)
+    Arg (String, TypeId)
+    TypeId (String)
+    Import (String)
