@@ -1,0 +1,73 @@
+package visitor;
+
+import ast.*;
+
+public class PrettyPrinter extends DefaultVisitor {
+    @Override
+    public void visit(Arg e) {
+        System.out.print(e.getId() + " being ");
+        e.getTypeId().accept(this);
+    }
+
+    @Override
+    public void visit(BoolExp e) {
+        System.out.print(e.isValue());
+    }
+
+    @Override
+    public void visit(CallExp e) {
+        System.out.print("call " + e.getId() + " with ");
+        for (int i = 0; i < e.getParameters().size(); i++) {
+            e.getParameters().get(i).accept(this);
+            if (i != e.getParameters().size() - 1)
+                System.out.print(" and ");
+        }
+        System.out.print(" end");
+    }
+
+    @Override
+    public void visit(Function e) {
+        System.out.print("function " + e.getId() + " takes ");
+        for (int i = 0; i < e.getArguments().size(); i++) {
+            e.getArguments().get(i).accept(this);
+            if (i != e.getArguments().size() - 1)
+                System.out.print(" and ");
+        }
+        System.out.println(" computes");
+        e.getBody().accept(this);
+        System.out.println(System.lineSeparator() + "end");
+    }
+
+    @Override
+    public void visit(IfExp e) {
+        System.out.print("if ");
+        e.getCondExp().accept(this);
+        System.out.print(" then ");
+        e.getThenExp().accept(this);
+        e.getElseExp().ifPresent(x -> {
+            System.out.print(" else ");
+            x.accept(this);
+        });
+        System.out.print(" end");
+    }
+
+    @Override
+    public void visit(IntExp e) {
+        System.out.print(e.getValue());
+    }
+
+    @Override
+    public void visit(TypeId e) {
+        System.out.print(e.getId());
+    }
+
+    @Override
+    public void visit(Var e) {
+        System.out.print(e.getId());
+    }
+
+    @Override
+    public void visit(Import e) {
+        System.out.println("import " + e.getImported());
+    }
+}
