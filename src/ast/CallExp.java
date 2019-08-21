@@ -7,6 +7,7 @@ import java.util.List;
 public class CallExp extends Exp {
     private final String id;
     private final List<Exp> parameters;
+    private Function def;
 
     public CallExp(String id, List<Exp> parameters) {
         this.id = id;
@@ -24,5 +25,13 @@ public class CallExp extends Exp {
     @Override
     public void accept(DefaultVisitor visitor) {
         visitor.visit(this);
+    }
+
+    public Function getDef() {
+        return def;
+    }
+
+    public void setDef(Function def) {
+        this.def = def;
     }
 }
