@@ -4,16 +4,23 @@ import java.util.Map;
 
 public class DefaultModules {
     private static String operators =
-            "primitive add takes l being int and r being int end\n" +
-                    "primitive sub takes l being int and r being int end\n" +
-                    "primitive div takes l being int and r being int end\n" +
-                    "primitive mul takes l being int and r being int end\n" +
-                    "primitive mod takes l being int and r being int end\n" +
-                    "primitive not takes b being boolean end\n" +
-                    "primitive land takes l being boolean and r being bool end\n" +
-                    "primitive lor takes l being boolean and r being bool end";
+            "primitive add being int takes l being int and r being int end\n" +
+                    "primitive sub being int takes l being int and r being int end\n" +
+                    "primitive div being int takes l being int and r being int end\n" +
+                    "primitive mul being int takes l being int and r being int end\n" +
+                    "primitive mod being int takes l being int and r being int end\n" +
+                    "primitive not being boolean takes b being boolean end\n" +
+                    "primitive land being boolean takes l being boolean and r being boolean end\n" +
+                    "primitive lor being boolean takes l being boolean and r being boolean end";
+
+    private static String output =
+            "primitive print being boolean takes i being int end\n" +
+                    "primitive lprint being boolean takes b being boolean end\n" +
+                    "primitive println being boolean takes i being int end\n" +
+                    "primitive lprintln being boolean takes b being boolean end";
 
     public static Map<String, String> modules = Map.of(
-      "operators", operators
+            "operators", operators,
+            "output", output
     );
 }

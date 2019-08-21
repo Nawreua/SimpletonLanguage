@@ -1,5 +1,6 @@
 package ast;
 
+import type.Type;
 import visitor.DefaultVisitor;
 
 public class TypeId extends AST {

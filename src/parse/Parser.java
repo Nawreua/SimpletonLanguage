@@ -58,6 +58,10 @@ public class Parser {
                 var id = lexer.resetAndGetToken();
                 assertToken(id.getType(), Token.TokenType.ID);
                 token = lexer.resetAndGetToken();
+                assertToken(token.getType(), Token.TokenType.BEING);
+                lexer.resetToken();
+                var typeId = ruleTypeId();
+                token = lexer.getToken();
                 assertToken(token.getType(), Token.TokenType.TAKES);
                 lexer.resetToken();
                 var args = ruleArgs();
@@ -67,17 +71,21 @@ public class Parser {
                 var body = ruleExp();
                 token = lexer.getToken();
                 assertToken(token.getType(), Token.TokenType.END);
-                res.add(new Function(id.getStringValue(), args, body));
+                res.add(new Function(id.getStringValue(), typeId, args, body));
             } else if (token.getType() == Token.TokenType.PRIMITIVE) {
                 var id = lexer.resetAndGetToken();
                 assertToken(id.getType(), Token.TokenType.ID);
                 token = lexer.resetAndGetToken();
+                assertToken(token.getType(), Token.TokenType.BEING);
+                lexer.resetToken();
+                var typeId = ruleTypeId();
+                token = lexer.getToken();
                 assertToken(token.getType(), Token.TokenType.TAKES);
                 lexer.resetToken();
                 var args = ruleArgs();
                 token = lexer.getToken();
                 assertToken(token.getType(), Token.TokenType.END);
-                res.add(new Function(id.getStringValue(), args, null));
+                res.add(new Function(id.getStringValue(), typeId, args, null));
             } else {
                 res.add(ruleExp());
             }

@@ -37,9 +37,12 @@ public class PrettyPrinter extends DefaultVisitor {
     @Override
     public void visit(Function e) {
         if (e.getBody() != null)
-            System.out.print("function " + e.getId() + " takes ");
+            System.out.print("function " + e.getId());
         else
-            System.out.print("primitive " + e.getId() + " takes ");
+            System.out.print("primitive " + e.getId());
+        System.out.print(" being ");
+        e.getTypeId().accept(this);
+        System.out.print(" takes ");
         for (int i = 0; i < e.getArguments().size(); i++) {
             e.getArguments().get(i).accept(this);
             if (i != e.getArguments().size() - 1)

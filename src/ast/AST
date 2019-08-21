@@ -1,6 +1,6 @@
 AST/
     Exps (List<AST>)
-    Function (String, List<Arg>, Exp)
+    Function (String, TypeId, List<Arg>, Exp)
     Exp/
         Var (String)
         IntExp (int)
