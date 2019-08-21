@@ -18,7 +18,7 @@ public class Parser {
 
     private List<AST> handleImport(String module) {
         try {
-            var module_file = new File(module + ".singleton");
+            var module_file = new File(module + ".simpleton");
             Lexer lexer;
             if (module_file.exists())
                 lexer = new Lexer(new BufferedReader(new FileReader(module_file)));
@@ -132,10 +132,6 @@ public class Parser {
             lexer.resetToken();
             var then = ruleExp();
             token = lexer.getToken();
-            if (token.getType() == Token.TokenType.END) {
-                lexer.resetToken();
-                return new IfExp(cond, then);
-            }
             assertToken(token.getType(), Token.TokenType.ELSE);
             lexer.resetToken();
             var optElse = ruleExp();

@@ -6,7 +6,7 @@ AST/
         IntExp (int)
         BoolExp (boolean)
         CallExp (String, List<Exp>)
-        IfExp (Exp, Exp, Opt<Exp>)
+        IfExp (Exp, Exp, Exp)
     Arg (String, TypeId)
     TypeId (String)
     Import (String)

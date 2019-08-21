@@ -53,7 +53,7 @@ public class TypeChecker extends DefaultVisitor {
     public void visit(IfExp e) {
         assertType(type(e.getCondExp()), BooleanType.instance);
         e.setType(type(e.getThenExp()));
-        e.getElseExp().ifPresent((Exp elseExp) -> assertType(type(elseExp), type(e.getThenExp())));
+        assertType(type(e.getElseExp()), type(e.getThenExp()));
     }
 
     @Override

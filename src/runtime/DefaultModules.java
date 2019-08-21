@@ -11,7 +11,8 @@ public class DefaultModules {
                     "primitive mod being int takes l being int and r being int end\n" +
                     "primitive not being boolean takes b being boolean end\n" +
                     "primitive land being boolean takes l being boolean and r being boolean end\n" +
-                    "primitive lor being boolean takes l being boolean and r being boolean end";
+                    "primitive lor being boolean takes l being boolean and r being boolean end\n" +
+                    "primitive eq being boolean takes l being int and r being int end";
 
     private static String output =
             "primitive print being boolean takes i being int end\n" +

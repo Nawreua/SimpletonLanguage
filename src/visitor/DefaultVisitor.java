@@ -35,7 +35,7 @@ public class DefaultVisitor {
     public void visit(IfExp e) {
         e.getCondExp().accept(this);
         e.getThenExp().accept(this);
-        e.getElseExp().ifPresent(x -> x.accept(this));
+        e.getElseExp().accept(this);
     }
 
     public void visit(IntExp e) {

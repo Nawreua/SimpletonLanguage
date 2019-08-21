@@ -20,7 +20,7 @@ public class PrettyPrinter extends DefaultVisitor {
 
     @Override
     public void visit(BoolExp e) {
-        System.out.print(e.isValue());
+        System.out.print(e.getValue());
     }
 
     @Override
@@ -61,10 +61,8 @@ public class PrettyPrinter extends DefaultVisitor {
         e.getCondExp().accept(this);
         System.out.print(" then ");
         e.getThenExp().accept(this);
-        e.getElseExp().ifPresent(x -> {
-            System.out.print(" else ");
-            x.accept(this);
-        });
+        System.out.print(" else ");
+        e.getElseExp().accept(this);
         System.out.print(" end");
     }
 

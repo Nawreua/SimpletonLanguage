@@ -12,7 +12,6 @@ exp := id
     | 'true'
     | 'false'
     | 'call' id 'with' params 'end'
-    | 'if' exp 'then' exp 'end'
     | 'if' exp 'then' exp 'else' exp 'end'
     ;
 
