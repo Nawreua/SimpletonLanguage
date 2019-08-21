@@ -3,6 +3,7 @@ language := exps;
 exps := %empty
      | 'import' id exps
      | 'function' id 'takes' args 'computes' exp 'end' exps
+     | 'primitive' id 'takes' args 'end' exps
      | exp exps
      ;
 

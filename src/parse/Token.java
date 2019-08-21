@@ -3,6 +3,7 @@ package parse;
 public class Token {
     public enum TokenType {
         FUNCTION,
+        PRIMITIVE,
         TAKES,
         COMPUTES,
         END,
@@ -24,6 +25,8 @@ public class Token {
         static TokenType fromStringToTokenType(String tok) {
             if (tok.equals("function"))
                 return TokenType.FUNCTION;
+            if (tok.equals("primitive"))
+                return TokenType.PRIMITIVE;
             else if (tok.equals("takes"))
                 return TokenType.TAKES;
             else if (tok.equals("computes"))

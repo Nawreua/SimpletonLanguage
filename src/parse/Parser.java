@@ -1,7 +1,9 @@
 package parse;
 
 import ast.*;
+import runtime.DefaultModules;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,26 @@ public class Parser {
             System.err.println("Error while parsing: expected: " + expected + ", actual: " + actual);
             System.exit(3);
         }
+    }
+
+    private List<AST> handleImport(String module) {
+        try {
+            var module_file = new File(module + ".singleton");
+            Lexer lexer;
+            if (module_file.exists())
+                lexer = new Lexer(new BufferedReader(new FileReader(module_file)));
+            else
+                lexer = new Lexer(new BufferedReader(new StringReader(DefaultModules.modules.get(module))));
+            var parser = new Parser(lexer);
+            var ast = parser.parse();
+            if (ast instanceof Exps)
+                return ((Exps) ast).getNodes();
+            else
+                return List.of(ast);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return List.of();
     }
 
     private final Lexer lexer;
@@ -31,7 +53,7 @@ public class Parser {
             if (token.getType() == Token.TokenType.IMPORT) {
                 var id = lexer.resetAndGetToken();
                 assertToken(id.getType(), Token.TokenType.ID);
-                res.add(new Import(id.getStringValue()));
+                res.addAll(handleImport(id.getStringValue()));
             } else if (token.getType() == Token.TokenType.FUNCTION) {
                 var id = lexer.resetAndGetToken();
                 assertToken(id.getType(), Token.TokenType.ID);
@@ -46,6 +68,16 @@ public class Parser {
                 token = lexer.getToken();
                 assertToken(token.getType(), Token.TokenType.END);
                 res.add(new Function(id.getStringValue(), args, body));
+            } else if (token.getType() == Token.TokenType.PRIMITIVE) {
+                var id = lexer.resetAndGetToken();
+                assertToken(id.getType(), Token.TokenType.ID);
+                token = lexer.resetAndGetToken();
+                assertToken(token.getType(), Token.TokenType.TAKES);
+                lexer.resetToken();
+                var args = ruleArgs();
+                token = lexer.getToken();
+                assertToken(token.getType(), Token.TokenType.END);
+                res.add(new Function(id.getStringValue(), args, null));
             } else {
                 res.add(ruleExp());
             }
