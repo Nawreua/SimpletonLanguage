@@ -2,12 +2,15 @@ package visitor;
 
 import ast.*;
 
-import java.util.List;
-
 public class DefaultVisitor {
 
     public void visit(AST e) {
         e.accept(this);
+    }
+
+    public void visit(Exps e) {
+        for (var node : e.getNodes())
+            node.accept(this);
     }
 
     public void visit(Arg e) {

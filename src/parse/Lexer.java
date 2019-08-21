@@ -56,7 +56,7 @@ public class Lexer {
         if (tok.matches("[a-zA-Z][a-zA-Z0-9_]*")) {
             return new Token(Token.TokenType.ID, tok);
         }
-        System.err.println("Invalid token: " + tok);
+        System.err.println("Invalid characters: " + tok);
         System.exit(2);
         return null;
     }

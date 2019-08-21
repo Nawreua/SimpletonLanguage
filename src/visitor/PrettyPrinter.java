@@ -3,6 +3,15 @@ package visitor;
 import ast.*;
 
 public class PrettyPrinter extends DefaultVisitor {
+
+    @Override
+    public void visit(Exps e) {
+        for (var exp : e.getNodes()) {
+            exp.accept(this);
+            System.out.println();
+        }
+    }
+
     @Override
     public void visit(Arg e) {
         System.out.print(e.getId() + " being ");
