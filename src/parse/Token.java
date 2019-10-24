@@ -22,39 +22,41 @@ public class Token {
         INT,
         EOF;
 
-        static TokenType fromStringToTokenType(String tok) {
-            if (tok.equals("function"))
-                return TokenType.FUNCTION;
-            if (tok.equals("primitive"))
-                return TokenType.PRIMITIVE;
-            else if (tok.equals("takes"))
-                return TokenType.TAKES;
-            else if (tok.equals("computes"))
-                return TokenType.COMPUTES;
-            else if (tok.equals("end"))
-                return TokenType.END;
-            else if (tok.equals("true"))
-                return TokenType.TRUE;
-            else if (tok.equals("false"))
-                return TokenType.FALSE;
-            else if (tok.equals("call"))
-                return TokenType.CALL;
-            else if (tok.equals("with"))
-                return TokenType.WITH;
-            else if (tok.equals("if"))
-                return TokenType.IF;
-            else if (tok.equals("then"))
-                return TokenType.THEN;
-            else if (tok.equals("else"))
-                return TokenType.ELSE;
-            else if (tok.equals("nothing"))
-                return TokenType.NOTHING;
-            else if (tok.equals("being"))
-                return TokenType.BEING;
-            else if (tok.equals("and"))
-                return TokenType.AND;
-            else if (tok.equals("import"))
-                return TokenType.IMPORT;
+        public static TokenType fromStringToTokenType(String tok) {
+            switch (tok) {
+                case "function":
+                    return TokenType.FUNCTION;
+                case "primitive":
+                    return TokenType.PRIMITIVE;
+                case "takes":
+                    return TokenType.TAKES;
+                case "computes":
+                    return TokenType.COMPUTES;
+                case "end":
+                    return TokenType.END;
+                case "true":
+                    return TokenType.TRUE;
+                case "false":
+                    return TokenType.FALSE;
+                case "call":
+                    return TokenType.CALL;
+                case "with":
+                    return TokenType.WITH;
+                case "if":
+                    return TokenType.IF;
+                case "then":
+                    return TokenType.THEN;
+                case "else":
+                    return TokenType.ELSE;
+                case "nothing":
+                    return TokenType.NOTHING;
+                case "being":
+                    return TokenType.BEING;
+                case "and":
+                    return TokenType.AND;
+                case "import":
+                    return TokenType.IMPORT;
+            }
             return null;
         }
     }
