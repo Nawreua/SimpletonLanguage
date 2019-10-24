@@ -31,4 +31,4 @@ param := exp
       | exp 'and' param
       ;
 
-type-id := id; // basic types: int and bool
+type-id := id; // basic types: int and boolean

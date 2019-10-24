@@ -2,7 +2,6 @@ import parse.Lexer;
 import parse.Parser;
 import visitor.Binder;
 import visitor.Interpreter;
-import visitor.PrettyPrinter;
 import visitor.TypeChecker;
 
 import java.io.BufferedReader;

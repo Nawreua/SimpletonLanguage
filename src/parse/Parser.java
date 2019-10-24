@@ -1,6 +1,7 @@
 package parse;
 
 import ast.*;
+import common.CommonMethods;
 import runtime.DefaultModules;
 
 import java.io.*;
@@ -10,10 +11,8 @@ import java.util.List;
 public class Parser {
 
     private void assertToken(Token.TokenType actual, Token.TokenType expected) {
-        if (expected != actual) {
-            System.err.println("Error while parsing: expected: " + expected + ", actual: " + actual);
-            System.exit(3);
-        }
+        if (expected != actual)
+            CommonMethods.errAndExit("parsing", "expected: " + expected + ", actual: " + actual, 3);
     }
 
     private List<AST> handleImport(String module) {
@@ -23,14 +22,14 @@ public class Parser {
             if (module_file.exists())
                 lexer = new Lexer(new BufferedReader(new FileReader(module_file)));
             else
-                lexer = new Lexer(new BufferedReader(new StringReader(DefaultModules.modules.get(module))));
+                lexer = new Lexer(new BufferedReader(new StringReader(DefaultModules.class.getDeclaredField(module).toString())));
             var parser = new Parser(lexer);
             var ast = parser.parse();
             if (ast instanceof Exps)
                 return ((Exps) ast).getNodes();
             else
                 return List.of(ast);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | NoSuchFieldException e) {
             e.printStackTrace();
         }
         return List.of();
@@ -172,8 +171,7 @@ public class Parser {
             list.add(0, new Arg(id.getStringValue(), typeId));
             return list;
         }
-        System.err.println("Error while parsing: rule arg does not match for token " + id.getType());
-        System.exit(3);
+        CommonMethods.errAndExit("parsing", "rule arg does not match for token " + id.getType(), 3);
         return null;
     }
 
@@ -203,7 +201,7 @@ public class Parser {
 
     private TypeId ruleTypeId() {
         var token = lexer.getToken();
-        assertToken (token.getType(), Token.TokenType.ID);
+        assertToken(token.getType(), Token.TokenType.ID);
         lexer.resetToken();
         return new TypeId(token.getStringValue());
     }
