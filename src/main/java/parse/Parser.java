@@ -21,15 +21,18 @@ public class Parser {
             Lexer lexer;
             if (module_file.exists())
                 lexer = new Lexer(new BufferedReader(new FileReader(module_file)));
-            else
-                lexer = new Lexer(new BufferedReader(new StringReader(DefaultModules.class.getDeclaredField(module).toString())));
+            else {
+                String builtin = "";
+                lexer = new Lexer(new BufferedReader(new StringReader(
+                        (String) DefaultModules.class.getDeclaredField(module).get(builtin))));
+            }
             var parser = new Parser(lexer);
             var ast = parser.parse();
             if (ast instanceof Exps)
                 return ((Exps) ast).getNodes();
             else
                 return List.of(ast);
-        } catch (FileNotFoundException | NoSuchFieldException e) {
+        } catch (FileNotFoundException | NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return List.of();
